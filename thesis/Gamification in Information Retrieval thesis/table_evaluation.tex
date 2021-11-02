@@ -1,0 +1,40 @@
+\begin{table*}[t!]
+    \setlength{\tabcolsep}{0.2em}
+    \caption{Overview of the effectiveness of obfuscated queries in ChatNoir and the games' document sample (`Sample'). We report the Mean Reciprocal Rank (MRR), the number of documents retrieved for the original query (`Ori.'), and the number of retrieved relevant documents (`Rel.'). We show results for automatically obfuscated queries and four different types of queries submitted by players.}
+    \label{table-evaluation}
+    \tiny
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll@{\qquad}ccc@{\quad}cc@{\quad}cc@{\quad}cc@{\quad}cc@{}}
+
+        \toprule
+
+        & & & & & \multicolumn{4}{@{}c@{\quad}}{\textbf {Our Sensitive Queries}} & \multicolumn{4}{@{}c@{\quad}}{\textbf {Sensitive Web Track Queries}}\\
+        
+        \cmidrule(r{1em}){6-9} \cmidrule(r{.1em}){10-13}
+        
+        & & \multicolumn{3}{@{}c@{\quad}}{Obfuscated Queries} & \multicolumn{2}{@{}c@{\quad}}{ChatNoir} & \multicolumn{2}{@{}c@{\quad}}{Sample} & \multicolumn{2}{@{}c@{\quad}}{ChatNoir} & \multicolumn{2}{@{}c@{\quad}}{Sample}\\
+
+        \cmidrule(r{1em}){3-5} \cmidrule(r{1em}){6-7} \cmidrule(r{1em}){8-9} \cmidrule(r{1em}){10-11} \cmidrule(r{.1em}){12-13}
+
+        & & Count & Length & Time & MRR & Ori. & MRR & Ori. & MRR & Rel. & MRR & Rel. \\
+
+        \midrule
+
+        \multirow{4}{*}{\rotatebox[origin=c]{90}{\parbox[c]{4em}{\centering \textbf{Queries}}}}
+        & Only Suggestions & \phantom{0}130\,/\,21\phantom{0} &  2.42 & 40.50\,s & 0.093 & 5.223 & 0.325 & 67.592 & 0.010 & 3.094 & 0.152 & 3.691\\
+        
+        & Some Suggestions & \phantom{0}556\,/\,125 & 4.53 & 42.45\,s & 0.046 & 4.667 & 0.258 & 85.829 & 0.013 & 3.632 & 0.038 & 3.568 \\
+        
+        & No Suggestions & \phantom{0}576\,/\,157 & 2.88 & 44.39\,s & 0.029 & 2.935 & 0.082 & 38.932 & 0.015 & 1.783 & 0.024 & 3.316 \\
+        
+        & New Word & \phantom{0}559\,/\,158 & 3.57 & 46.27\,s & 0.002 & 1.517 & 0.051 & 49.992 & 0.002 & 1.235 & 0.005 & 2.790 \\
+
+        \midrule
+
+        %\multirow{3}{*}{\rotatebox[origin=c]{90}{\parbox[c]{10em}{\centering \textbf{Au}}}}
+        & Automatic & 1025\,/\,327 & 2.91 & --- & 0.088 & 9.229 & 0.420 & 84.264 & 0.014 & 2.872 & 0.042 & 3.743 \\
+        
+        \bottomrule
+
+    \end{tabular*}
+    \vspace*{-2ex}
+\end{table*}

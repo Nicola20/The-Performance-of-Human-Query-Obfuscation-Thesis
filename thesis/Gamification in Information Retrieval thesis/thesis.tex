@@ -1,0 +1,163 @@
+\documentclass[english,bachelor]{webisthesis}
+
+%\ThesisSetTitle{The usage of gamification in the context of human-based query obfuscation}
+%\ThesisSetTitle{human-based query obfuscation with gamification}
+\ThesisSetTitle{The Performance of Human Query Obfuscation - A Gamified Approach}
+%\ThesisSetTitle{Human query obfuscation using gamification}
+\ThesisSetKeywords{Gamification, Information Retrieval, Query, Obfuscation}
+
+\ThesisSetAuthor{Nicola Lea Libera}
+\ThesisSetStudentNumber{117073}
+\ThesisSetDateOfBirth{05}{06}{1997}
+\ThesisSetPlaceOfBirth{Berlin}
+
+\ThesisSetSupervisors{Prof.\ Dr.\ Benno Stein,Matthias Hagen}
+
+\ThesisSetSubmissionDate{29}{10}{2021}
+
+% Packages
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amsthm}
+%\usepackage[square,sort&compress,numbers]{natbib}
+\usepackage{graphicx}
+\usepackage{makecell}
+\usepackage{wrapfig}
+\usepackage[lofdepth,lotdepth]{subfig}
+\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{float}
+\usepackage{nth}
+\usepackage{textcomp}
+\usepackage[protrusion=true,expansion=true]{microtype}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage[all]{nowidow}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{algorithm} 
+\usepackage{algpseudocode} 
+\usepackage{comment}
+\usepackage{eqparbox}
+\renewcommand{\algorithmiccomment}[1]{\hfill\eqparbox{COMMENT}{\# #1}}
+
+% Settings for json example
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont\ttfamily,
+    %numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1, string=[s]{"}{"},
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    literate=
+     *{0}{{{}}}{1}
+      {1}{{{}}}{1}
+      {2}{{{}}}{1}
+      {3}{{{}}}{1}
+      {4}{{{}}}{1}
+      {5}{{{}}}{1}
+      {6}{{{}}}{1}
+      {7}{{{}}}{1}
+      {8}{{{}}}{1}
+      {9}{{{}}}{1}
+      {:}{{{{:}}}}{1}
+      {,}{{{{,}}}}{1}
+      {\{}{{{{\{}}}}{1}
+      {\}}{{{{\}}}}}{1}
+      {[}{{{{[}}}}{1}
+      {]}{{{{]}}}}{1},
+}
+
+% Settings for footer and header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+%\fancyfoot[C]{Gamification in Information Retrieval}
+
+\renewcommand{\headrulewidth}{0.5pt}
+%\renewcommand{\footrulewidth}{0.5pt}
+
+% Create links in the pdf document
+% Hyperref has some incompatibilities with other packages
+% Some other packages must be loaded before, some after hyperref
+\usehyperref
+
+% centered tabularx column type
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+% add space after \forall
+\let\foralltemp\forall
+\renewcommand*{\forall}{\foralltemp\mkern4mu}
+
+% obfuscation diff highlighting
+\definecolor{highlightcolor}{gray}{0.87}
+\newcommand{\highl}[1]{%
+	\begingroup\setlength{\fboxsep}{2.5pt}%
+	\colorbox{highlightcolor}{\hspace*{-2.5pt}\vphantom{My}#1\hspace*{-2.5pt}}%
+	\endgroup%
+}
+
+%\DeclareGraphicsExtensions{.png,.pdf}
+%\graphicspath{{./graphics/}}
+
+% define a macro \Autoref to allow multiple references to be passed to \autoref
+% thanks to Andrew <https://tex.stackexchange.com/questions/15728/multiple-references-with-autoref>
+\makeatletter
+\newcommand\Autoref[1]{\@first@ref#1,@}
+\def\@throw@dot#1.#2@{#1}% discard everything after the dot
+\def\@set@refname#1{%    % set \@refname to autoefname+s using \getrefbykeydefault
+    \edef\@tmp{\getrefbykeydefault{#1}{anchor}{}}%
+    \def\@refname{\@nameuse{\expandafter\@throw@dot\@tmp.@autorefname}s}%
+}
+\def\@first@ref#1,#2{%
+  \ifx#2@\autoref{#1}\let\@nextref\@gobble% only one ref, revert to normal \autoref
+  \else%
+    \@set@refname{#1}%  set \@refname to autoref name
+    \@refname~\ref{#1}% add autoefname and first reference
+    \let\@nextref\@next@ref% push processing to \@next@ref
+  \fi%
+  \@nextref#2%
+}
+\def\@next@ref#1,#2{%
+   \ifx#2@ and~\ref{#1}\let\@nextref\@gobble% at end: print and+\ref and stop
+   \else, \ref{#1}% print  ,+\ref and continue
+   \fi%
+   \@nextref#2%
+}
+\makeatother
+
+% ---- Bibliography ----------------------------------------------------
+
+\usepackage{biblatex}
+\addbibresource{literature.bib}
+
+% custom colors
+%\definecolor{dark-gray}{gray}{0.35}
+
+% custom hyphenation rules
+%\hyphenation{write-prints}
+
+\begin{document}
+\begin{frontmatter}
+	\begin{abstract}
+The internet is a great source to learn new things and many people use search engines to answer their information needs. However, search engines like Google save every search query in query logs which poses a risk to the privacy of users. Many different approaches exist that try to improve the privacy of searchers by distorting search profiles or hiding the user's identity. But, all of these approaches have weaknesses and need improvement. In this thesis, we research how well humans are able to obfuscate sensitive queries while still retrieving relevant web pages. Therefore, we developed City of Rebellion, a web game on the ClueWeb12 in which users have to obfuscate a given sensitive query without using any of its terms. For an obfuscated query, our game assigns points depending on the result quality of the formulated query. To help the player with their obfuscations, a list of useful search terms is provided along with a relevant document. From the data we collected in a pilot study with 72 players, we conclude that the participants were able to obfuscate sensitive queries while still retrieving relevant documents but only with the help of the given keywords.
+	\end{abstract}
+%	\cleardoublepage
+	\tableofcontents
+\end{frontmatter}
+
+% Content
+\include{01-introduction}
+\include{02-related-work}
+\include{03-query-obfuscation-game}
+\include{04-evaluation}
+\include{05-conclusion}
+
+\printbibliography
+\end{document}
